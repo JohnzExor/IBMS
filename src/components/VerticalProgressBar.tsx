@@ -10,31 +10,31 @@ const VerticalProgressBar = ({ steps, status }: Props) => {
     <div>
       {steps.map((data, index) => (
         <div key={index} className="flex gap-1 mt-2 items-center">
-          <p className={status === index ? "text-primary " : "text-gray-300"}>
-            {status >= index ? (
-              status === 5 && index >= 2 ? (
-                <CiCircleRemove size={30} className="text-red-400" />
-              ) : (
-                <CiCircleCheck size={30} />
-              )
-            ) : (
-              <CiCircleMinus size={30} />
-            )}
-          </p>
           <p
             className={
-              status >= index
-                ? status === 5 && index >= 2
-                  ? " text-red-400 font-bold text-lg"
-                  : "text-gray-300 font-bold text-lg"
-                : "text-gray-300 "
+              status === index
+                ? "text-primary font-bold text-lg"
+                : "text-gray-300"
             }
           >
-            {status >= index
-              ? status === 5 && index == 2
-                ? "Denied"
-                : data
-              : data}
+            {status >= index ? (
+              status === 5 && index >= 2 ? (
+                <span className="flex items-center gap-1 text-red-400 font-bold text-lg">
+                  <CiCircleRemove size={30} />
+                  <span>Denied</span>
+                </span>
+              ) : (
+                <span className="flex items-center gap-1">
+                  <CiCircleCheck size={30} />
+                  {data}
+                </span>
+              )
+            ) : (
+              <span className="flex items-center gap-1">
+                <CiCircleMinus size={30} />
+                {data}
+              </span>
+            )}
           </p>
         </div>
       ))}

@@ -33,12 +33,14 @@ const Reports = ({ data }: Props) => {
     <div className="w-full">
       <Accordion type="single">
         <AccordionItem value="item-1">
-          <AccordionTrigger>{data.createdDateAt}</AccordionTrigger>
+          <AccordionTrigger>
+            {data.createdDateAt} {data.createdTimeAt}
+          </AccordionTrigger>
           <AccordionContent className="flex flex-col items-center gap-4">
             {data.status == 0 && "You have sent the request"}
-            {data.status == 1 && "You have sent the request"}
-            {data.status == 2 && "You have sent the request"}
-            {data.status == 3 && "You have sent the request"}
+            {data.status == 1 && "We are now reviewing your request"}
+            {data.status == 2 && "Your request is accepted"}
+            {data.status == 3 && "Report complete"}
             {data.status == 5 && "Your request was denied"}
 
             <VerticalProgressBar steps={steps} status={Number(data.status)} />
