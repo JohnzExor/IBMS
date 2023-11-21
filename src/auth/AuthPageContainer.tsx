@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 const AuthPageContainer = () => {
   return (
     <div>
-      <div className=" fixed flex justify-end md:justify-center w-full  p-4">
+      <div className=" fixed flex justify-end w-full  p-4">
         <ModeToggle />
       </div>
       <div className=" h-screen flex flex-col  items-center justify-center w-full py-10">

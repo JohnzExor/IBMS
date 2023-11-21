@@ -9,7 +9,7 @@ const WelcomePage = () => {
   const [page, setPage] = useState(0);
   return (
     <div>
-      <div className=" fixed flex justify-end md:justify-center w-full p-4">
+      <div className=" fixed flex justify-end  w-full p-4">
         <ModeToggle />
       </div>
       <div className=" h-screen fixed w-full flex items-end -z-10">

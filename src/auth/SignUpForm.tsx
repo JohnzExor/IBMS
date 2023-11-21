@@ -36,12 +36,12 @@ const SignUpForm = () => {
 
     if (value.password === value.confirmPassword) {
       await userSignUp(value.email, value.password);
-      setIsLoading(false);
     } else {
       toast({
         description: "Password dont match!",
       });
     }
+    setIsLoading(false);
   };
 
   return (

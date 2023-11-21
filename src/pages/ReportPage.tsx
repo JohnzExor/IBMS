@@ -34,10 +34,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { reportSchema } from "@/lib/types";
 import { useFirebaseServices } from "@/store/useFirebase";
+import { toast } from "@/components/ui/use-toast";
 
 const ReportPage = () => {
   const { submitReport } = useFirebaseServices();
-  const [isLoading, setIsLoading] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const navigate = useNavigate();
 
@@ -75,12 +75,28 @@ const ReportPage = () => {
     },
   });
 
+  const { formState } = form;
+
   const onSubmit = async (values: z.infer<typeof reportSchema>) => {
-    setIsLoading(true);
-    setIsConfirmed(false);
     await submitReport(values);
-    setIsLoading(false);
-    navigate("/reportsuccess");
+
+    if (formState.isSubmitted) {
+      navigate("/reportsuccess");
+    }
+  };
+
+  const checkAllFields = () => {
+    if (
+      !form.getValues().nameToReport ||
+      !form.getValues().violation ||
+      !form.getValues().placeOfTheEvent ||
+      !form.getValues().dateAndTime ||
+      !form.getValues().details
+    ) {
+      toast({ description: "Fill out all the required fields" });
+    } else {
+      setIsConfirmed(true);
+    }
   };
 
   return (
@@ -195,10 +211,10 @@ const ReportPage = () => {
             />
             {isConfirmed ? (
               <button
-                className="text-white flex items-center gap-1 bg-nextColor dark:bg-slate-900 w-fit py-2 px-4 rounded-2xl"
+                className="text-white flex items-center gap-1 bg-nextColor dark:bg-opacity-50 w-fit py-2 px-4 rounded-2xl"
                 type="submit"
               >
-                {isLoading ? "Submitting.." : "Submit Report"}
+                {formState.isSubmitting ? "Submitting.." : "Submit Report"}
               </button>
             ) : (
               <div className=" flex gap-4 text-white">
@@ -208,7 +224,7 @@ const ReportPage = () => {
                   </button>
                 </Link>
                 <Dialog>
-                  <DialogTrigger className="text-white flex items-center gap-1 bg-nextColor dark:bg-slate-900 w-fit py-2 px-4 rounded-2xl">
+                  <DialogTrigger className="text-white flex items-center gap-1 bg-nextColor dark:bg-opacity-50 w-fit py-2 px-4 rounded-2xl">
                     Next
                   </DialogTrigger>
                   <DialogContent className=" w-80">
@@ -232,7 +248,6 @@ const ReportPage = () => {
                           <span className="font-bold">Happened in: </span>
                           {form.getValues().placeOfTheEvent}
                         </span>
-
                         <span className="font-bold">Details:</span>
                         {form.getValues().details}
                       </DialogDescription>
@@ -250,7 +265,7 @@ const ReportPage = () => {
                         <Button
                           type="submit"
                           className="text-white gap-1 bg-nextColor dark:bg-opacity-50 w-full py-2 px-4 rounded-2xl text-center"
-                          onClick={() => setIsConfirmed(true)}
+                          onClick={() => checkAllFields()}
                         >
                           Confirm
                         </Button>
