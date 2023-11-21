@@ -85,7 +85,7 @@ const ReportPage = () => {
 
   return (
     <div className="flex flex-col items-center gap-4 w-80 pt-10">
-      <h1>Report</h1>
+      <h1 className="font-semibold text-xl">Report</h1>
       <div>
         <Form {...form}>
           <form

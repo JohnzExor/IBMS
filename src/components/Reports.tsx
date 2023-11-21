@@ -33,10 +33,10 @@ const Reports = ({ data }: Props) => {
     <div className="w-full">
       <Accordion type="multiple">
         <AccordionItem value="item-1">
-          <AccordionTrigger>
-            {data.createdDateAt} {data.createdTimeAt}
+          <AccordionTrigger className=" bg-gradient-to-l shadow-md  from-skipColor dark:from-slate-700 rounded-xl p-4 mt-2">
+            {data.createdDateAt}
           </AccordionTrigger>
-          <AccordionContent className="flex flex-col items-center gap-4">
+          <AccordionContent className="flex flex-col items-center gap-4 pt-4">
             {data.status == 0 && "You have sent the request"}
             {data.status == 1 && "We are now reviewing your request"}
             {data.status == 2 && "Your request is accepted"}

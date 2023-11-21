@@ -48,73 +48,75 @@ const SignUpForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-3 w-full flex flex-col items-center justify-center"
+        className="space-y-3 w-full flex flex-col md:flex-row items-center justify-center md:gap-10"
       >
-        <h1 className="font-bold text-xl">Sign Up</h1>
-        <img src={img} className=" w-52" />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  placeholder="Corporate Email"
-                  {...field}
-                  className=" bg-gray-100 w-72 py-6 rounded-xl dark:bg-opacity-50"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  {...field}
-                  className=" bg-gray-100 py-6 rounded-xl w-72 dark:bg-opacity-50"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Confirm Password"
-                  {...field}
-                  className=" bg-gray-100 py-6 rounded-xl w-72 dark:bg-opacity-50"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button
-          type="submit"
-          disabled={isLoading}
-          className=" font-semibold  bg-nextColor dark:bg-opacity-50 rounded-xl h-12 w-32 shadow-xl text-white"
-        >
-          {isLoading ? "Loading" : "Login"}
-        </Button>
-        <p className="text-sm mt-6">
-          Already have an Account?{" "}
-          <Link to={"/auth/login"} className=" text-blue-500 underline">
-            Login
-          </Link>
-        </p>
+        <img src={img} className=" w-72 md:w-1/3" />
+        <div className="space-y-3 flex flex-col items-center">
+          <h1 className="font-bold text-xl">Sign Up</h1>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    placeholder="Corporate Email"
+                    {...field}
+                    className=" bg-gray-100 w-72 py-6 rounded-xl dark:bg-opacity-50"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    {...field}
+                    className=" bg-gray-100 py-6 rounded-xl w-72 dark:bg-opacity-50"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="Confirm Password"
+                    {...field}
+                    className=" bg-gray-100 py-6 rounded-xl w-72 dark:bg-opacity-50"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className=" font-semibold  bg-nextColor dark:bg-opacity-50 rounded-xl h-12 w-32 shadow-xl text-white"
+          >
+            {isLoading ? "Loading" : "Login"}
+          </Button>
+          <p className="text-sm mt-6">
+            Already have an Account?{" "}
+            <Link to={"/auth/login"} className=" text-blue-500 underline">
+              Login
+            </Link>
+          </p>
+        </div>
       </form>
     </Form>
   );
