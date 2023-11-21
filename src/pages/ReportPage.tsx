@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Link, useNavigate } from "react-router-dom";
-
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import {
   Dialog,
   DialogContent,
@@ -40,6 +40,7 @@ const ReportPage = () => {
   const { submitReport } = useFirebaseServices();
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [hideName, setHideName] = useState(true);
   const navigate = useNavigate();
 
   const behaviors = [
@@ -106,25 +107,34 @@ const ReportPage = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-3 w-full flex flex-col items-center justify-center"
           >
-            <FormField
-              control={form.control}
-              name="nameToReport"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Name of the Person"
-                      {...field}
-                      className=" bg-gray-100 w-72 py-6 rounded-xl dark:bg-opacity-50"
-                      required
-                      disabled={isConfirmed}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex gap-1 items-center">
+              <FormField
+                control={form.control}
+                name="nameToReport"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type={hideName ? "password" : "text"}
+                        placeholder="Name of the Person"
+                        {...field}
+                        className=" bg-gray-100 w-56 py-6 rounded-xl dark:bg-opacity-50"
+                        required
+                        disabled={isConfirmed}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <span
+                onClick={() => setHideName(!hideName)}
+                className="text-4xl cursor-pointer p-2 "
+              >
+                {hideName ? <VscEye /> : <VscEyeClosed />}
+              </span>
+            </div>
+
             <FormField
               control={form.control}
               name="violation"
