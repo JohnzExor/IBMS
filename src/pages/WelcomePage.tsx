@@ -3,11 +3,15 @@ import { Link } from "react-router-dom";
 import img from "@/assets/images/welcomePage1.svg";
 
 import img2 from "@/assets/images/welcomePage2.svg";
+import { ModeToggle } from "@/components/theme/mode-toggle";
 
 const WelcomePage = () => {
   const [page, setPage] = useState(0);
   return (
     <div>
+      <div className=" fixed flex justify-end md:justify-center w-full p-4">
+        <ModeToggle />
+      </div>
       <div className=" h-screen fixed w-full flex items-end -z-10">
         <div className=" bg-gradient-to-t from-red-100 dark:from-transparent h-1/3 w-full"></div>
       </div>
@@ -77,7 +81,7 @@ const WelcomePage = () => {
                   healthy relationships, enhancing productivity. Say goodbye to
                   workplace unrest. Hello to harmony.
                 </p>
-                <div className=" flex gap-4 text-white mt-5">
+                <div className=" flex gap-4 text-white my-5">
                   <Link to={"/auth/login"}>
                     <button className=" font-semibold  bg-nextColor dark:bg-opacity-50 rounded-xl h-12 w-32 shadow-xl">
                       Next
