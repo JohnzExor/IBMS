@@ -3,7 +3,7 @@ import img from "@/assets/images/successReport.svg";
 
 const ReportSuccess = () => {
   return (
-    <div className=" flex flex-col items-center gap-10 ">
+    <div className=" flex flex-col items-center h-screen -mt-20 md:-mt-32 justify-center gap-10">
       <h1 className="font-semibold text-2xl">Report Success</h1>
       <img src={img} className="w-72" />
       <Link to={"/progress"}>

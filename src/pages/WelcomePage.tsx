@@ -8,7 +8,7 @@ import { ModeToggle } from "@/components/theme/mode-toggle";
 const WelcomePage = () => {
   const [page, setPage] = useState(0);
   return (
-    <div>
+    <div className="w-full">
       <div className=" fixed flex justify-end  w-full p-4">
         <ModeToggle />
       </div>

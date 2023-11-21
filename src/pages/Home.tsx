@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center h-screen  pt-20 md:pt-32 p-6">
         <div className="h-screen fixed w-full flex items-end -z-10">
           <div className=" bg-gradient-to-t from-red-100 dark:from-transparent h-1/3 w-full"></div>
         </div>
