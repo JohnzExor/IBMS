@@ -1,7 +1,18 @@
+import { auth } from "@/Firebase";
 import { ModeToggle } from "@/components/theme/mode-toggle";
-import { Outlet } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const AuthPageContainer = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/");
+      }
+    });
+  }, []);
   return (
     <div>
       <div className=" fixed flex justify-end w-full  p-4">

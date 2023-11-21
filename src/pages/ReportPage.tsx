@@ -39,6 +39,7 @@ import { toast } from "@/components/ui/use-toast";
 const ReportPage = () => {
   const { submitReport } = useFirebaseServices();
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const behaviors = [
@@ -75,14 +76,11 @@ const ReportPage = () => {
     },
   });
 
-  const { formState } = form;
-
   const onSubmit = async (values: z.infer<typeof reportSchema>) => {
+    setIsLoading(true);
     await submitReport(values);
-
-    if (formState.isSubmitted) {
-      navigate("/reportsuccess");
-    }
+    navigate("/reportsuccess");
+    setIsLoading(false);
   };
 
   const checkAllFields = () => {
@@ -214,7 +212,7 @@ const ReportPage = () => {
                 className="text-white flex items-center gap-1 bg-nextColor dark:bg-opacity-50 w-fit py-2 px-4 rounded-2xl"
                 type="submit"
               >
-                {formState.isSubmitting ? "Submitting.." : "Submit Report"}
+                {isLoading ? "Submitting.." : "Submit Report"}
               </button>
             ) : (
               <div className=" flex gap-4 text-white">

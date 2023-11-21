@@ -14,13 +14,13 @@ export type ReportDetails = {
 };
 
 export type Firebase = {
-  userLogIn: (email: string, password: string) => Promise<void>;
-  userSignUp: (email: string, password: string) => Promise<void>;
-  userLogout: () => Promise<void>;
   reportProgress: ReportDetails[];
-  submitReport: (data: ReportDetails) => Promise<void>;
-  getUserReportProgress: () => Promise<void>;
-  cancelReport: (documentID: string) => Promise<void>;
+  userLogIn: (email: string, password: string) => void;
+  userSignUp: (email: string, password: string) => void;
+  userLogout: () => void;
+  submitReport: (data: ReportDetails) => void;
+  getUserReportProgress: () => void;
+  cancelReport: (documentID: string) => void;
 };
 
 export const authSchema = z.object({
@@ -33,9 +33,9 @@ export const authSchema = z.object({
 });
 
 export const reportSchema = z.object({
-  nameToReport: z.string().min(6, { message: "Must be 6 characters." }),
+  nameToReport: z.string().min(1, { message: "Must be 1 characters." }),
   violation: z.string(),
-  placeOfTheEvent: z.string().min(6, { message: "Must be 6 characters." }),
-  dateAndTime: z.string().min(6, { message: "Must be 6 characters." }),
-  details: z.string().min(6, { message: "Must be 6 characters." }),
+  placeOfTheEvent: z.string().min(1, { message: "Must be 1 characters." }),
+  dateAndTime: z.string().min(1, { message: "Must be 1 characters." }),
+  details: z.string().min(1, { message: "Must be 1 characters." }),
 });

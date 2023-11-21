@@ -108,7 +108,7 @@ const SignUpForm = () => {
             disabled={isLoading}
             className=" font-semibold  bg-nextColor dark:bg-opacity-50 rounded-xl h-12 w-32 shadow-xl text-white"
           >
-            {isLoading ? "Loading" : "Login"}
+            {isLoading ? "Loading" : "Create Account"}
           </Button>
           <p className="text-sm mt-6">
             Already have an Account?{" "}

@@ -40,14 +40,22 @@ const Reports = ({ data }: Props) => {
             {data.status == 0 && "You have sent the request"}
             {data.status == 1 && "We are now reviewing your request"}
             {data.status == 2 && "Your request is accepted"}
-            {data.status == 3 && "Report complete"}
-            {data.status == 5 && "Your request was denied"}
+            {data.status == 3 && (
+              <span className=" text-green-700">Report complete</span>
+            )}
+            {data.status == 5 && (
+              <span className=" text-red-400">Your request was denied</span>
+            )}
 
             <VerticalProgressBar steps={steps} status={Number(data.status)} />
             <Dialog>
-              <DialogTrigger className="text-white flex items-center gap-1 bg-nextColor dark:bg-slate-900 w-fit py-2 px-4 rounded-2xl">
-                Cancel
-              </DialogTrigger>
+              {data.status == 3 || data.status == 5 ? (
+                ""
+              ) : (
+                <DialogTrigger className="text-white flex items-center gap-1 bg-nextColor dark:bg-slate-900 w-fit py-2 px-4 rounded-2xl">
+                  Cancel
+                </DialogTrigger>
+              )}
               <DialogContent className=" w-80">
                 <DialogHeader>
                   <DialogTitle>Are you sure absolutely sure?</DialogTitle>

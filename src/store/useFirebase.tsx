@@ -20,8 +20,8 @@ export const useFirebaseServices = create<Firebase>((set) => ({
   userLogIn: async (email, password) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      toast({ description: `${error.message}` });
     }
   },
 
@@ -37,15 +37,15 @@ export const useFirebaseServices = create<Firebase>((set) => ({
           });
         }
       );
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      toast({ description: `${error.message}` });
     }
   },
   userLogout: async () => {
     try {
       await signOut(auth);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      toast({ description: `${error.message}` });
     }
   },
 
@@ -65,9 +65,9 @@ export const useFirebaseServices = create<Firebase>((set) => ({
         createTimeAt: currentDate.toLocaleTimeString(),
         status: 0,
         documentID: documentID,
-      });
-    } catch (error) {
-      console.error(error);
+      }).then(() => toast({ description: "Reported" }));
+    } catch (error: any) {
+      toast({ description: `${error.message}` });
     }
   },
 
@@ -82,19 +82,19 @@ export const useFirebaseServices = create<Firebase>((set) => ({
         }
       });
       set({ reportProgress: fetchedData.reverse() });
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      toast({ description: `${error.message}` });
     }
   },
   cancelReport: async (documentID) => {
     const { getUserReportProgress } = useFirebaseServices.getState();
     try {
       await deleteDoc(doc(db, "reports", documentID)).then(() => {
-        toast({ description: "Deleted Sucessfully" });
+        toast({ description: "Report cancellation was successful." });
         getUserReportProgress();
       });
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      toast({ description: `${error.message}` });
     }
   },
 }));
