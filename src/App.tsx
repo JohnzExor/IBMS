@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import AuthPageContainer from "./auth/AuthPageContainer";
 import LoginForm from "./auth/LoginForm";
 import SignUpForm from "./auth/SignUpForm";
