@@ -31,7 +31,7 @@ const Reports = ({ data }: Props) => {
   const steps = ["Request", "Reviewing", "Accepted", "Completed"];
   return (
     <div className="w-full">
-      <Accordion type="single">
+      <Accordion type="multiple">
         <AccordionItem value="item-1">
           <AccordionTrigger>
             {data.createdDateAt} {data.createdTimeAt}

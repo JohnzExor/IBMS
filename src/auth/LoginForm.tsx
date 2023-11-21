@@ -42,7 +42,7 @@ const LoginForm = () => {
         className="space-y-3 w-full flex flex-col items-center justify-center"
       >
         <h1 className="font-bold text-xl">Login</h1>
-        <img src={img} className=" w-80 ml-14" />
+        <img src={img} className=" w-72" />
         <FormField
           control={form.control}
           name="email"
@@ -83,7 +83,7 @@ const LoginForm = () => {
         >
           {isLoading ? "Loading" : "Login"}
         </Button>
-        <p className="text-sm pt-10">
+        <p className="text-sm pt-5">
           Dont have an Account?{" "}
           <Link to={"/auth/signup"} className=" text-blue-500 underline">
             Sign Up

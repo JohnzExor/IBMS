@@ -51,7 +51,7 @@ const SignUpForm = () => {
         className="space-y-3 w-full flex flex-col items-center justify-center"
       >
         <h1 className="font-bold text-xl">Sign Up</h1>
-        <img src={img} className=" w-52 ml-14" />
+        <img src={img} className=" w-52" />
         <FormField
           control={form.control}
           name="email"

@@ -15,9 +15,9 @@ const ReportProgress = () => {
       {reportProgress.length > 0 ? (
         reportProgress.map((data, index) => <Reports data={data} key={index} />)
       ) : (
-        <div className="flex flex-col items-center justify-center h-screen">
-          <h1>You dont have any reports pending</h1>
-          <img src={img} className="w-80" />
+        <div className="flex flex-col items-center gap-8 justify-center h-screen">
+          <h1 className="font-semibold">You dont have any reports pending</h1>
+          <img src={img} className="w-52" />
         </div>
       )}
     </div>
