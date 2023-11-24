@@ -70,7 +70,7 @@ const LoginForm = () => {
                     type="password"
                     placeholder="Password"
                     {...field}
-                    className=" bg-gray-100 py-6 rounded-xl w-72 dark:bg-opacity-50"
+                    className="bg-gray-100 w-72 py-6 rounded-xl dark:bg-opacity-50"
                   />
                 </FormControl>
                 <FormMessage />

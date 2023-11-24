@@ -24,18 +24,24 @@ export type Firebase = {
 };
 
 export const authSchema = z.object({
-  email: z.string().min(6, { message: "Email must be 6 characters." }),
-  password: z.string().min(6, { message: "Password must be 6 characters." }),
+  email: z
+    .string()
+    .min(6, { message: "Password must be atleast 6 characters." }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be atleast 6 characters." }),
   confirmPassword: z
     .string()
-    .min(6, { message: "Password must be 6 characters." })
+    .min(6, { message: "Password must be atleast 6 characters." })
     .optional(),
 });
 
 export const reportSchema = z.object({
-  nameToReport: z.string().min(1, { message: "Must be 1 characters." }),
-  violation: z.string(),
-  placeOfTheEvent: z.string().min(1, { message: "Must be 1 characters." }),
-  dateAndTime: z.string().min(1, { message: "Must be 1 characters." }),
-  details: z.string().min(1, { message: "Must be 1 characters." }),
+  nameToReport: z.string().min(1, { message: "Must be atleast 1 character." }),
+  violation: z.string().min(1, { message: "Required" }),
+  placeOfTheEvent: z
+    .string()
+    .min(1, { message: "Must be atleast 1 character." }),
+  dateAndTime: z.string().min(1, { message: "Must be atleast 1 character." }),
+  details: z.string().min(1, { message: "Must be atleast 1 character." }),
 });

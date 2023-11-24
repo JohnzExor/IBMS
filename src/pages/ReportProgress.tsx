@@ -14,7 +14,7 @@ const ReportProgress = () => {
   return (
     <div className="flex flex-col md:flex-row md:items-start items-center justify-center gap-4 md:gap-20">
       <img src={img2} className="w-80 md:w-1/3" />
-      <div className="flex flex-col items-center md:w-1/3">
+      <div className="flex flex-col items-center md:w-1/3  ">
         <h1 className="font-semibold text-2xl w-full text-left">Reports</h1>
         {reportProgress.length > 0 ? (
           reportProgress.map((data, index) => (
