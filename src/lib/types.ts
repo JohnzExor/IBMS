@@ -24,9 +24,7 @@ export type Firebase = {
 };
 
 export const authSchema = z.object({
-  email: z
-    .string()
-    .min(6, { message: "Password must be atleast 6 characters." }),
+  email: z.string().min(6, { message: "Email must be atleast 6 characters." }),
   password: z
     .string()
     .min(6, { message: "Password must be atleast 6 characters." }),
