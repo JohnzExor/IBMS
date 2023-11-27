@@ -1,5 +1,6 @@
 import { auth } from "@/Firebase";
 import Header from "@/components/Header";
+import SideBar from "@/components/SideBar";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -14,15 +15,19 @@ const Home = () => {
     });
   }, []);
   return (
-    <div>
+    <>
       <Header />
-      <div className="flex flex-col items-center h-screen  pt-20 md:pt-32 p-6">
-        <div className="h-screen fixed w-full flex items-end -z-10">
-          <div className=" bg-gradient-to-t from-red-100 dark:from-transparent h-1/3 w-full"></div>
+      <div className="flex flex-col items-center h-screen px-6">
+        <div className="flex md:w-4/5 min-h-screen pt-20 w-full">
+          <div className=" hidden md:block h-5/6 border-r pr-4 ">
+            <SideBar />
+          </div>
+          <div className="md:h-4/5">
+            <Outlet />
+          </div>
         </div>
-        <Outlet />
       </div>
-    </div>
+    </>
   );
 };
 

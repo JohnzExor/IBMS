@@ -1,24 +1,12 @@
 import { FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { FaBarsProgress } from "react-icons/fa6";
-import { AiOutlineLogout } from "react-icons/ai";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { DialogClose } from "@radix-ui/react-dialog";
-import { Button } from "./ui/button";
-import { useFirebaseServices } from "@/store/useFirebase";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { FaBarsStaggered } from "react-icons/fa6";
+import SideBar from "./SideBar";
 import { ModeToggle } from "./theme/mode-toggle";
 
 const Header = () => {
-  const { userLogout } = useFirebaseServices();
   return (
     <div className="fixed w-full flex justify-center p-4 bg-gradient-to-b from-skipColor dark:from-transparent">
       <div className="flex gap-1 justify-center md:w-1/4">
@@ -27,7 +15,7 @@ const Header = () => {
           className="text-white flex items-center gap-1 bg-nextColor dark:bg-slate-900 w-fit py-2 px-4 rounded-2xl"
         >
           <FaHome size={20} />
-          <span className="hidden md:block">Home</span>
+          <span>Home</span>
         </Link>
         <Link
           to={"/progress"}
@@ -36,40 +24,17 @@ const Header = () => {
           <FaBarsProgress size={20} />
           Report Progress
         </Link>
-        <div>
+        <Sheet>
+          <SheetTrigger className="bg-nextColor dark:bg-slate-900 w-fit py-2 px-4 rounded-2xl text-white md:hidden">
+            <FaBarsStaggered />
+          </SheetTrigger>
+          <SheetContent>
+            <SideBar />
+          </SheetContent>
+        </Sheet>
+        <div className="hidden md:block">
           <ModeToggle />
         </div>
-
-        <Dialog>
-          <DialogTrigger className="text-white flex items-center gap-1 bg-nextColor dark:bg-slate-900 w-fit py-2 px-4 rounded-2xl">
-            <AiOutlineLogout />
-            <span className="hidden md:block">Logout</span>
-          </DialogTrigger>
-          <DialogContent className=" w-80">
-            <DialogHeader>
-              <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-              <DialogDescription>
-                You are about to be logged out from this device.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter className=" flex flex-row gap-2">
-              <DialogClose asChild>
-                <Button
-                  type="button"
-                  className="text-white dark:bg-slate-900 gap-1 w-fit py-2 px-4 rounded-2xl"
-                >
-                  Cancel
-                </Button>
-              </DialogClose>
-              <Button
-                onClick={() => userLogout()}
-                className="text-white gap-1 bg-nextColor dark:bg-opacity-50 w-full py-2 px-4 rounded-2xl"
-              >
-                Logout
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
       </div>
     </div>
   );

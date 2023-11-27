@@ -100,8 +100,8 @@ const ReportPage = () => {
   };
 
   return (
-    <div className=" w-full flex flex-col md:flex-row justify-center h-screen  -mt-6 md:-mt-32  items-center gap-4 md:gap-20">
-      <img src={img} className="md:w-1/3" />
+    <div className="flex flex-col items-center justify-center h-full w-full md:flex-row gap-4 md:gap-20 mt-20 md:mt-0">
+      <img src={img} className="md:w-1/3 md:hidden" />
       <div className="pb-7">
         <h1 className="font-semibold text-xl">Write a Report</h1>
         <div>
@@ -133,7 +133,7 @@ const ReportPage = () => {
                   onClick={() => setHideName(!hideName)}
                   className="text-4xl cursor-pointer p-2 "
                 >
-                  {hideName ? <VscEye /> : <VscEyeClosed />}
+                  {!hideName ? <VscEye /> : <VscEyeClosed />}
                 </span>
               </div>
 
@@ -296,6 +296,7 @@ const ReportPage = () => {
           </Form>
         </div>
       </div>
+      <img src={img} className="md:w-1/2 hidden md:block" />
     </div>
   );
 };

@@ -5,42 +5,59 @@ import {
   signOut,
 } from "firebase/auth";
 import { create } from "zustand";
-import { Firebase, ReportDetails } from "@/lib/types";
+import { Firebase, ReportDetails, UsersDetails } from "@/lib/types";
 import {
   collection,
   deleteDoc,
   doc,
   getDocs,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { toast } from "@/components/ui/use-toast";
 
 export const useFirebaseServices = create<Firebase>((set) => ({
+  usersData: [],
   reportProgress: [],
+  adminDashboardData: [],
   userLogIn: async (email, password) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (error: any) {
-      toast({ description: `${error.message}` });
-    }
+    const snapshot = await getDocs(collection(db, "users"));
+    const fetchedData: UsersDetails[] = [];
+
+    const userLogin = async () => {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error: any) {
+        toast({ description: `${error.message}` });
+      }
+    };
+
+    const updateDocData = async (uid: string) => {
+      await updateDoc(doc(db, "users", uid), {
+        isRegistered: 1,
+      });
+    };
+
+    snapshot.forEach((doc) => {
+      const postData = doc.data() as UsersDetails;
+      if (postData.email == email) {
+        fetchedData.push(postData);
+        if (postData.isRegistered == 0) {
+          createUserWithEmailAndPassword(auth, email, "123456").then(
+            async () => {
+              if (postData.uid) updateDocData(postData.uid);
+            }
+          );
+        } else {
+          userLogin();
+        }
+      }
+      if (fetchedData.length == 0) {
+        toast({ description: "Email not found" });
+      }
+    });
   },
 
-  userSignUp: async (email, password) => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password).then(
-        (userCredentials) => {
-          const uid = userCredentials.user.uid;
-          setDoc(doc(db, "users", uid), {
-            uid: uid,
-            email: email,
-            password: password,
-          });
-        }
-      );
-    } catch (error: any) {
-      toast({ description: `${error.message}` });
-    }
-  },
   userLogout: async () => {
     try {
       await signOut(auth);
@@ -75,13 +92,40 @@ export const useFirebaseServices = create<Firebase>((set) => ({
     try {
       const snapshot = await getDocs(collection(db, "reports"));
       const fetchedData: ReportDetails[] = [];
+
       snapshot.forEach((doc) => {
         const postData = doc.data() as ReportDetails;
         if (postData.uid === auth.currentUser?.uid) {
           fetchedData.push(postData);
         }
       });
+
       set({ reportProgress: fetchedData.reverse() });
+    } catch (error: any) {
+      toast({ description: `${error.message}` });
+    }
+  },
+  getUsersReport: async () => {
+    try {
+      const snapshot = await getDocs(collection(db, "reports"));
+      const fetchedAdminDashboardData: ReportDetails[] = [];
+      const status = ["Request", "Reviewing", "Accepted", "Completed"];
+      snapshot.forEach((doc) => {
+        const postData = doc.data() as ReportDetails;
+        fetchedAdminDashboardData.push({
+          uid: postData.uid,
+          nameToReport: postData.nameToReport,
+          violation: postData.violation,
+          placeOfTheEvent: postData.placeOfTheEvent,
+          dateAndTime: postData.dateAndTime,
+          details: postData.details,
+          createdDateAt: postData.createdDateAt,
+          createdTimeAt: postData.createdTimeAt,
+          status: status[Number(postData.status)],
+          documentID: postData.documentID,
+        });
+      });
+      set({ adminDashboardData: fetchedAdminDashboardData.reverse() });
     } catch (error: any) {
       toast({ description: `${error.message}` });
     }
@@ -96,5 +140,14 @@ export const useFirebaseServices = create<Firebase>((set) => ({
     } catch (error: any) {
       toast({ description: `${error.message}` });
     }
+  },
+  addNewUser: async (email) => {
+    const uid = Date.now().toString();
+    await setDoc(doc(db, "users", uid), {
+      email: email,
+      password: "123456",
+      isRegistered: 0,
+      uid: uid,
+    });
   },
 }));

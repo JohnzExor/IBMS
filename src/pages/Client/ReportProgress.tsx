@@ -12,9 +12,9 @@ const ReportProgress = () => {
     getUserReportProgress();
   }, []);
   return (
-    <div className="flex flex-col md:flex-row md:items-start items-center justify-center gap-4 md:gap-20">
-      <img src={img2} className="w-80 md:w-1/3" />
-      <div className="flex flex-col items-center md:w-1/3  ">
+    <div className="w-full flex flex-col md:flex-row md:gap-20 items-start justify-center md:pt-20">
+      <img src={img2} className="w-80 md:w-1/3 md:hidden" />
+      <div className="flex flex-col items-center md:w-1/2 md:overflow-y-auto md:h-[750px] md:px-4">
         <h1 className="font-semibold text-2xl w-full text-left">Reports</h1>
         {reportProgress.length > 0 ? (
           reportProgress.map((data, index) => (
@@ -27,6 +27,7 @@ const ReportProgress = () => {
           </div>
         )}
       </div>
+      <img src={img2} className="md:w-1/3 hidden md:block" />
     </div>
   );
 };

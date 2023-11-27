@@ -5,7 +5,6 @@ import { useFirebaseServices } from "@/store/useFirebase";
 import { authSchema } from "@/lib/types";
 import { useState } from "react";
 import img from "@/assets/images/loginPage.svg";
-import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -84,12 +83,6 @@ const LoginForm = () => {
           >
             {isLoading ? "Loading" : "Login"}
           </Button>
-          <p className="text-sm mt-6">
-            Dont have an Account?{" "}
-            <Link to={"/auth/signup"} className=" text-blue-500 underline">
-              Sign Up
-            </Link>
-          </p>
         </div>
       </form>
     </Form>

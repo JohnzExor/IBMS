@@ -9,18 +9,28 @@ export type ReportDetails = {
   details: String;
   createdDateAt?: string;
   createdTimeAt?: string;
-  status?: Number;
+  status?: number | string;
   documentID?: string;
 };
 
+export type UsersDetails = {
+  email: string;
+  password: string;
+  uid?: string;
+  isRegistered: number;
+};
+
 export type Firebase = {
+  usersData: [];
   reportProgress: ReportDetails[];
+  adminDashboardData: ReportDetails[];
   userLogIn: (email: string, password: string) => void;
-  userSignUp: (email: string, password: string) => void;
   userLogout: () => void;
   submitReport: (data: ReportDetails) => void;
   getUserReportProgress: () => void;
+  getUsersReport: () => void;
   cancelReport: (documentID: string) => void;
+  addNewUser: (email: string) => void;
 };
 
 export const authSchema = z.object({
