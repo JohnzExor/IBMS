@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useFirebaseServices } from "@/store/useFirebase";
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 import {
   Dialog,
@@ -34,14 +34,17 @@ const AdminPanel = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      addNewUser(email);
+      addNewUser(email).then(() => setEmail(""));
     }
   };
   return (
     <div className="p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <label className="font-semibold">IBMS ADMIN</label>
+          <Link to={"/"} className=" cursor-pointer font-semibold">
+            <label>IBMS ADMIN</label>
+          </Link>
+
           <Dialog>
             <DialogTrigger className="text-white flex items-center gap-2 bg-nextColor dark:bg-slate-900 w-fit py-2 px-4 rounded-2xl">
               <FaUserPlus size={25} />

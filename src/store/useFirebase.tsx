@@ -20,6 +20,7 @@ export const useFirebaseServices = create<Firebase>((set) => ({
   usersData: [],
   reportProgress: [],
   adminDashboardData: [],
+
   userLogIn: async (email, password) => {
     const snapshot = await getDocs(collection(db, "users"));
     const fetchedData: UsersDetails[] = [];
@@ -38,10 +39,13 @@ export const useFirebaseServices = create<Firebase>((set) => ({
       });
     };
 
+    let emailFound = false;
+
     snapshot.forEach((doc) => {
       const postData = doc.data() as UsersDetails;
       if (postData.email == email) {
         fetchedData.push(postData);
+        emailFound = true;
         if (postData.isRegistered == 0) {
           createUserWithEmailAndPassword(auth, email, "123456").then(
             async () => {
@@ -52,10 +56,10 @@ export const useFirebaseServices = create<Firebase>((set) => ({
           userLogin();
         }
       }
-      if (fetchedData.length == 0) {
-        toast({ description: "Email not found" });
-      }
     });
+    if (!emailFound) {
+      toast({ description: "Email not found" });
+    }
   },
 
   userLogout: async () => {
@@ -148,6 +152,8 @@ export const useFirebaseServices = create<Firebase>((set) => ({
       password: "123456",
       isRegistered: 0,
       uid: uid,
-    });
+    }).then(() =>
+      toast({ title: "Success", description: "The email has been added" })
+    );
   },
 }));

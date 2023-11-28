@@ -30,7 +30,7 @@ export type Firebase = {
   getUserReportProgress: () => void;
   getUsersReport: () => void;
   cancelReport: (documentID: string) => void;
-  addNewUser: (email: string) => void;
+  addNewUser: (email: string) => Promise<void>;
 };
 
 export const authSchema = z.object({
