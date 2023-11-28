@@ -149,15 +149,18 @@ export const useFirebaseServices = create<Firebase>((set) => ({
     }
   },
   addNewUser: async (email) => {
+    const { getUsersData } = useFirebaseServices.getState();
     const uid = Date.now().toString();
     await setDoc(doc(db, "users", uid), {
       email: email,
       password: "123456",
       isRegistered: 0,
       uid: uid,
-    }).then(() =>
-      toast({ title: "Success", description: "The email has been added" })
-    );
+      status: 0,
+    }).then(() => {
+      toast({ title: "Success", description: "The email has been added" });
+      getUsersData();
+    });
   },
   getUsersData: async () => {
     const snapshot = await getDocs(collection(db, "users"));

@@ -30,6 +30,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
+import { useLocation } from "react-router-dom";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -66,19 +67,27 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const { pathname } = useLocation();
+
   return (
     <div>
       <div className="flex items-center py-4">
-        <Input
-          placeholder="Search Person"
-          value={
-            (table.getColumn("nameToReport")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("nameToReport")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+        {pathname === "/admin/reports" ? (
+          <Input
+            placeholder="Search Person"
+            value={
+              (table.getColumn("nameToReport")?.getFilterValue() as string) ??
+              ""
+            }
+            onChange={(event) =>
+              table
+                .getColumn("nameToReport")
+                ?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+        ) : null}
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
