@@ -11,6 +11,7 @@ export type ReportDetails = {
   createdTimeAt?: string;
   status?: number | string;
   documentID?: string;
+  fileStatus?: string;
 };
 
 export type UsersDetails = {
@@ -18,10 +19,11 @@ export type UsersDetails = {
   password: string;
   uid?: string;
   isRegistered: number;
+  status: number;
 };
 
 export type Firebase = {
-  usersData: [];
+  usersData: UsersDetails[];
   reportProgress: ReportDetails[];
   adminDashboardData: ReportDetails[];
   userLogIn: (email: string, password: string) => void;
@@ -31,6 +33,7 @@ export type Firebase = {
   getUsersReport: () => void;
   cancelReport: (documentID: string) => void;
   addNewUser: (email: string) => Promise<void>;
+  getUsersData: () => void;
 };
 
 export const authSchema = z.object({

@@ -74,7 +74,7 @@ const WelcomePage = () => {
                 </h1>
               </div>
               <div className="flex flex-col items-center">
-                <h1 className=" font-medium w-full mt-3">About us</h1>
+                <h1 className=" font-medium w-full mt-3">About</h1>
                 <p className="font-thin">
                   Introducing our app for a positive work environment. Report
                   issues anonymously, cross-referenced with evidence. Fostering

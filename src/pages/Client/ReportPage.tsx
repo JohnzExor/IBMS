@@ -216,6 +216,10 @@ const ReportPage = () => {
                   </FormItem>
                 )}
               />
+              <div className="grid w-full max-w-sm items-center gap-1.5 text-sm">
+                <h1 className=" pl-2">Evidence/Proof (Image or Video)</h1>
+                <Input type="file" />
+              </div>
               {isConfirmed ? (
                 <div className="flex justify-center gap-2">
                   <button
@@ -244,14 +248,17 @@ const ReportPage = () => {
                     <DialogTrigger className="text-white flex items-center gap-1 bg-nextColor dark:bg-opacity-50 w-fit py-2 px-4 rounded-2xl">
                       Next
                     </DialogTrigger>
-                    <DialogContent className=" w-80">
+                    <DialogContent>
                       <DialogHeader>
                         <DialogTitle className="font-bold">
                           Confirm Report
                         </DialogTitle>
-                        <DialogDescription className=" w-72 break-words flex flex-col items-center">
+                        <DialogDescription className=" break-words flex flex-col text-left">
                           <span>
                             <span className="font-bold">Name: </span>
+                            <span>
+                              {form.getValues().nameToReport.substring(0, 1)}
+                            </span>
                             <input
                               type="password"
                               defaultValue={form.getValues().nameToReport}
@@ -262,18 +269,28 @@ const ReportPage = () => {
                             <span className="font-bold">Violation: </span>
                             {form.getValues().violation}
                             <br />
-                            <span className="font-bold">Happened in: </span>
+                            <span className="font-bold">
+                              Location of the incident:{" "}
+                            </span>
                             {form.getValues().placeOfTheEvent}
+                            <br />
+                            <span className="font-bold">Details: </span>
+                            {form.getValues().details}
+                            <br />
+                            <span className="font-bold">Evidence/Proof: </span>
+                            <br />
+                            <span className=" italic">
+                              No Evidence submitted. Submitting an evidence will
+                              greatly help in validating your report.
+                            </span>
                           </span>
-                          <span className="font-bold">Details:</span>
-                          {form.getValues().details}
                         </DialogDescription>
                       </DialogHeader>
                       <DialogFooter className=" flex flex-row gap-2">
                         <DialogClose asChild>
                           <Button
                             type="button"
-                            className="text-white dark:bg-slate-900 gap-1 w-fit py-2 px-4 rounded-2xl"
+                            className="text-white gap-1 w-fit py-2 px-4 rounded-2xl bg-skipColor hover:bg-skipColor dark:bg-opacity-50 shadow-md"
                           >
                             Cancel
                           </Button>
@@ -281,7 +298,7 @@ const ReportPage = () => {
                         <DialogClose asChild>
                           <Button
                             type="submit"
-                            className="text-white gap-1 bg-nextColor dark:bg-opacity-50 w-full py-2 px-4 rounded-2xl text-center"
+                            className="text-white gap-1 bg-nextColor dark:bg-opacity-50 w-full py-2 px-4 rounded-2xl text-center hover:bg-nextColor shadow-md"
                             onClick={() => checkAllFields()}
                           >
                             Confirm

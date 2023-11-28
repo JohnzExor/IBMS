@@ -1,6 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import fileExample from "@/assets/images/fileExample.gif";
 
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -17,6 +18,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ReportDetails } from "@/lib/types";
 import { Link } from "react-router-dom";
+import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
+import { DialogContent } from "../ui/dialog";
 
 export const columns: ColumnDef<ReportDetails>[] = [
   {
@@ -76,6 +79,38 @@ export const columns: ColumnDef<ReportDetails>[] = [
     accessorKey: "status",
     header: "Status",
   },
+  {
+    accessorKey: "File status",
+    header: "Proof/Evidences",
+    cell: ({ row }) => {
+      const report = row.original;
+      return Number(report.fileStatus) == 0
+        ? "No Evidence Submitted"
+        : "Evidence Submitted";
+    },
+  },
+
+  {
+    id: "evidence",
+    header: "Evidence",
+    cell: ({ row }) => {
+      const report = row.original;
+      return (
+        <Dialog>
+          <DialogTrigger
+            disabled={Number(report.fileStatus) == 0 ? true : false}
+            className=" border p-2 rounded-md bg-nextColor text-white dark:bg-opacity-50 disabled:opacity-50"
+          >
+            View Evidence
+          </DialogTrigger>
+          <DialogContent>
+            <h1 className=" font-semibold text-2xl">{report.violation}</h1>
+            <img src={fileExample} alt="example" />
+          </DialogContent>
+        </Dialog>
+      );
+    },
+  },
 
   {
     id: "actions",
@@ -106,7 +141,9 @@ export const columns: ColumnDef<ReportDetails>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <Link to={`/admin/viewreport/${report.documentID}`}>
-              <DropdownMenuItem>View Report</DropdownMenuItem>
+              <DropdownMenuItem>Download Report</DropdownMenuItem>
+              <DropdownMenuItem>Set Status</DropdownMenuItem>
+              <DropdownMenuItem>Flag Report</DropdownMenuItem>
             </Link>
           </DropdownMenuContent>
         </DropdownMenu>

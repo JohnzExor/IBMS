@@ -15,6 +15,8 @@ import { auth } from "./Firebase";
 import UserAccountSettings from "./pages/Client/UserAccountSettings";
 import Dashboard from "./pages/Admin/Dashboard";
 import AdminPanel from "./pages/Admin/AdminPanel";
+import AdminHome from "./pages/Admin/AdminHome";
+import ManageUsers from "./pages/Admin/ManageUsers";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -46,7 +48,9 @@ const App = () => {
               />
             </Route>
             <Route path="/admin" element={<AdminPanel />}>
+              <Route path="/admin/home" element={<AdminHome />} />
               <Route path="/admin/dashboard" element={<Dashboard />} />
+              <Route path="/admin/manageusers" element={<ManageUsers />} />
             </Route>
           </Routes>
         )}

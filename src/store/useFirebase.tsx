@@ -86,6 +86,7 @@ export const useFirebaseServices = create<Firebase>((set) => ({
         createTimeAt: currentDate.toLocaleTimeString(),
         status: 0,
         documentID: documentID,
+        fileStatus: 0,
       }).then(() => toast({ description: "Reported" }));
     } catch (error: any) {
       toast({ description: `${error.message}` });
@@ -114,6 +115,7 @@ export const useFirebaseServices = create<Firebase>((set) => ({
       const snapshot = await getDocs(collection(db, "reports"));
       const fetchedAdminDashboardData: ReportDetails[] = [];
       const status = ["Request", "Reviewing", "Accepted", "Completed"];
+
       snapshot.forEach((doc) => {
         const postData = doc.data() as ReportDetails;
         fetchedAdminDashboardData.push({
@@ -127,6 +129,7 @@ export const useFirebaseServices = create<Firebase>((set) => ({
           createdTimeAt: postData.createdTimeAt,
           status: status[Number(postData.status)],
           documentID: postData.documentID,
+          fileStatus: postData.fileStatus,
         });
       });
       set({ adminDashboardData: fetchedAdminDashboardData.reverse() });
@@ -155,5 +158,16 @@ export const useFirebaseServices = create<Firebase>((set) => ({
     }).then(() =>
       toast({ title: "Success", description: "The email has been added" })
     );
+  },
+  getUsersData: async () => {
+    const snapshot = await getDocs(collection(db, "users"));
+    const fetchedData: UsersDetails[] = [];
+
+    snapshot.forEach((doc) => {
+      const postdata = doc.data() as UsersDetails;
+      fetchedData.push(postdata);
+    });
+
+    set({ usersData: fetchedData.reverse() });
   },
 }));
