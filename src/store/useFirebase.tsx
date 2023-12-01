@@ -33,16 +33,16 @@ export const useFirebaseServices = create<Firebase>((set) => ({
       }
     });
     set({ currentUser: fetchedData });
-    console.log(fetchedData);
   },
 
   userLogIn: async (email, password) => {
     const snapshot = await getDocs(collection(db, "users"));
-    const fetchedData: UsersDetails[] = [];
 
     const userLogin = async () => {
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, email, password).then(() =>
+          toast({ description: "Login Success" })
+        );
       } catch (error: any) {
         toast({ description: `${error.message}` });
       }
@@ -51,27 +51,36 @@ export const useFirebaseServices = create<Firebase>((set) => ({
     const updateDocData = async (uid: string) => {
       await updateDoc(doc(db, "users", uid), {
         isRegistered: 1,
-      });
+        status: 1,
+      }).then(() => toast({ description: "Account Created" }));
     };
 
     let emailFound = false;
+    let passwordCorrect = false;
 
     snapshot.forEach((doc) => {
       const postData = doc.data() as UsersDetails;
-      if (postData.email == email) {
-        fetchedData.push(postData);
+      if (postData.email === email) {
         emailFound = true;
-        if (postData.isRegistered == 0) {
-          createUserWithEmailAndPassword(auth, email, "123456").then(
-            async () => {
-              if (postData.uid) updateDocData(postData.uid);
-            }
-          );
-        } else {
-          userLogin();
+        if (postData.password === password) {
+          passwordCorrect = true;
+          if (postData.isRegistered == 0) {
+            createUserWithEmailAndPassword(auth, email, "123456").then(
+              async () => {
+                if (postData.uid) updateDocData(postData.uid);
+              }
+            );
+          } else {
+            userLogin();
+          }
         }
       }
     });
+
+    if (!passwordCorrect) {
+      toast({ description: "Password incorrect" });
+    }
+
     if (!emailFound) {
       toast({ description: "Email not found" });
     }
