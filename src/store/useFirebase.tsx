@@ -20,6 +20,21 @@ export const useFirebaseServices = create<Firebase>((set) => ({
   usersData: [],
   reportProgress: [],
   adminDashboardData: [],
+  currentUser: [],
+
+  getCurrentUser: async () => {
+    const snapshot = await getDocs(collection(db, "users"));
+    const fetchedData: UsersDetails[] = [];
+
+    snapshot.forEach((docs) => {
+      const postData = docs.data() as UsersDetails;
+      if (postData.email === auth.currentUser?.email) {
+        fetchedData.push(postData);
+      }
+    });
+    set({ currentUser: fetchedData });
+    console.log(fetchedData);
+  },
 
   userLogIn: async (email, password) => {
     const snapshot = await getDocs(collection(db, "users"));
@@ -64,7 +79,7 @@ export const useFirebaseServices = create<Firebase>((set) => ({
 
   userLogout: async () => {
     try {
-      await signOut(auth);
+      await signOut(auth).then(() => set({ currentUser: [] }));
     } catch (error: any) {
       toast({ description: `${error.message}` });
     }
@@ -148,10 +163,11 @@ export const useFirebaseServices = create<Firebase>((set) => ({
       toast({ description: `${error.message}` });
     }
   },
-  addNewUser: async (email) => {
+  addNewUser: async (email, isSuperUser) => {
     const { getUsersData } = useFirebaseServices.getState();
     const uid = Date.now().toString();
     await setDoc(doc(db, "users", uid), {
+      isSuperUser: isSuperUser ? 1 : 0,
       email: email,
       password: "123456",
       isRegistered: 0,

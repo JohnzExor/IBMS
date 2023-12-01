@@ -1,4 +1,3 @@
-import { auth } from "@/Firebase";
 import TextSizeToggle from "@/components/TextSizeToggle";
 import { Button } from "@/components/ui/button";
 
@@ -12,12 +11,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { useFirebaseServices } from "@/store/useFirebase";
 import { Link } from "react-router-dom";
 
 const UserAccountSettings = () => {
+  const { currentUser } = useFirebaseServices();
   return (
     <div className=" flex flex-col h-full w-full md:p-7 gap-2">
-      {auth.currentUser?.emailVerified && (
+      {currentUser.some((data) => data.isSuperUser === 1) ? (
         <Link
           to={"/admin/"}
           className=" font-semibold border p-2 rounded-md shadow-md hover:bg-skipColor hover:bg-opacity-50 duration-500 dark:hover:bg-opacity-25"
@@ -28,7 +29,7 @@ const UserAccountSettings = () => {
             here to access the admin dashboard.
           </span>
         </Link>
-      )}
+      ) : null}
       <TextSizeToggle />
       <Dialog>
         <DialogTrigger className="border p-2 text-start rounded-md shadow-md font-semibold hover:bg-skipColor hover:bg-opacity-50 duration-500 dark:hover:bg-opacity-25">

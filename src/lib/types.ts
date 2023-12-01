@@ -1,3 +1,4 @@
+import { CheckedState } from "@radix-ui/react-checkbox";
 import { z } from "zod";
 
 export type ReportDetails = {
@@ -15,6 +16,7 @@ export type ReportDetails = {
 };
 
 export type UsersDetails = {
+  isSuperUser: number;
   email: string;
   password: string;
   uid?: string;
@@ -23,6 +25,8 @@ export type UsersDetails = {
 };
 
 export type Firebase = {
+  getCurrentUser: () => Promise<void>;
+  currentUser: UsersDetails[];
   usersData: UsersDetails[];
   reportProgress: ReportDetails[];
   adminDashboardData: ReportDetails[];
@@ -32,7 +36,10 @@ export type Firebase = {
   getUserReportProgress: () => void;
   getUsersReport: () => void;
   cancelReport: (documentID: string) => void;
-  addNewUser: (email: string) => Promise<void>;
+  addNewUser: (
+    email: string,
+    isSuperUser: CheckedState | undefined
+  ) => Promise<void>;
   getUsersData: () => void;
 };
 

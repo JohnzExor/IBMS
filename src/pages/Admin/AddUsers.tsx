@@ -1,6 +1,8 @@
+import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useFirebaseServices } from "@/store/useFirebase";
+import { CheckedState } from "@radix-ui/react-checkbox";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useState } from "react";
 
@@ -10,11 +12,17 @@ const AddUsers = () => {
   const { addNewUser } = useFirebaseServices();
 
   const [email, setEmail] = useState("");
+  const [isSuperUser, setIsSuperUser] = useState<CheckedState | undefined>(
+    undefined
+  );
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      addNewUser(email).then(() => setEmail(""));
+      addNewUser(email, isSuperUser).then(() => {
+        setEmail("");
+        setIsSuperUser(false);
+      });
     }
   };
 
@@ -33,6 +41,15 @@ const AddUsers = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="checkbox"
+              checked={isSuperUser}
+              onCheckedChange={(e) => setIsSuperUser(e)}
+            />
+            <label htmlFor="checkbox">Super User</label>
+          </div>
+
           <div className="flex items-center gap-2">
             <DialogClose className="text-white flex  items-center gap-1 bg-skipColor dark:bg-opacity-50 w-fit py-2 px-4 rounded-2xl">
               Close

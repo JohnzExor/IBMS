@@ -17,12 +17,14 @@ import Reports from "./pages/Admin/Reports";
 import AdminPanel from "./pages/Admin/AdminPanel";
 import AdminHome from "./pages/Admin/AdminHome";
 import ManageUsers from "./pages/Admin/ManageUsers";
+import { useFirebaseServices } from "./store/useFirebase";
 
 const App = () => {
+  const { getCurrentUser } = useFirebaseServices();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     onAuthStateChanged(auth, () => {
-      setIsLoading(false);
+      getCurrentUser().then(() => setIsLoading(false));
     });
   }, []);
   return (

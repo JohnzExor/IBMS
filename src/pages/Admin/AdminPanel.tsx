@@ -1,6 +1,4 @@
-import { auth } from "@/Firebase";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { Link, Outlet, useNavigate } from "react-router-dom";
@@ -10,15 +8,17 @@ import AdminLinks from "./AdminLinks";
 import { ModeToggle } from "@/components/theme/mode-toggle";
 import { useFirebaseServices } from "@/store/useFirebase";
 import { IoLogOut } from "react-icons/io5";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/Firebase";
 
 const AdminPanel = () => {
   const navigate = useNavigate();
-  const { userLogout } = useFirebaseServices();
+  const { userLogout, currentUser } = useFirebaseServices();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (!user?.emailVerified) {
-        navigate("/auth/welcome");
+    onAuthStateChanged(auth, () => {
+      if (!currentUser.some((data) => data.isSuperUser === 1)) {
+        navigate("/");
       }
     });
   }, []);
