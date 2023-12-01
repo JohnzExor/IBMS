@@ -13,9 +13,14 @@ const DefaultHome = () => {
           life secure and protected.
         </p>
         <div className=" flex items-center justify-center w-full">
-          <Link to={"/report"} className=" text-white">
-            <button className=" font-semibold flex items-center justify-center bg-nextColor dark:bg-opacity-50 rounded-xl h-12 px-4 shadow-xl">
-              <BiSolidReport size={35} />
+          <Link
+            to={"/report"}
+            className="text-white w-full bg-nextColor dark:bg-opacity-50 rounded-xl p-2 shadow-xl hover:bg-transparent hover:text-black duration-500 dark:hover:text-white hover:border"
+          >
+            <button className=" text-center font-semibold flex items-center w-full">
+              <div className="flex items-center">
+                <BiSolidReport size={35} />
+              </div>
               Report
             </button>
           </Link>

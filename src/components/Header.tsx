@@ -9,13 +9,13 @@ import { ModeToggle } from "./theme/mode-toggle";
 const Header = () => {
   return (
     <div className="fixed w-full flex justify-center p-4 bg-gradient-to-b from-skipColor dark:from-transparent">
-      <div className="flex gap-1 justify-center md:w-1/4">
+      <div className="flex gap-1 justify-center">
         <Link
           to={"/"}
           className="text-white flex items-center gap-1 bg-nextColor dark:bg-slate-900 w-fit py-2 px-4 rounded-2xl"
         >
           <FaHome size={20} />
-          <span>Home</span>
+          Home
         </Link>
         <Link
           to={"/progress"}

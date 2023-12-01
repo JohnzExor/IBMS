@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
 import { useLocation } from "react-router-dom";
+import AddUsers from "@/pages/Admin/AddUsers";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -87,6 +88,8 @@ export function DataTable<TData, TValue>({
             className="max-w-sm"
           />
         ) : null}
+
+        {pathname === "/admin/manageusers" ? <AddUsers /> : null}
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

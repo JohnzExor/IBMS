@@ -3,13 +3,17 @@ import { DataTable } from "@/components/tables/data-table";
 import { useFirebaseServices } from "@/store/useFirebase";
 import { useEffect } from "react";
 
-const Dashboard = () => {
+const Reports = () => {
   const { getUsersReport, adminDashboardData } = useFirebaseServices();
   useEffect(() => {
     getUsersReport();
   }, []);
 
-  return <DataTable columns={columns} data={adminDashboardData} />;
+  return (
+    <div className="w-full">
+      <DataTable columns={columns} data={adminDashboardData} />
+    </div>
+  );
 };
 
-export default Dashboard;
+export default Reports;

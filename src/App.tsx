@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./Firebase";
 import UserAccountSettings from "./pages/Client/UserAccountSettings";
-import Dashboard from "./pages/Admin/Dashboard";
+import Reports from "./pages/Admin/Reports";
 import AdminPanel from "./pages/Admin/AdminPanel";
 import AdminHome from "./pages/Admin/AdminHome";
 import ManageUsers from "./pages/Admin/ManageUsers";
@@ -49,7 +49,7 @@ const App = () => {
             </Route>
             <Route path="/admin" element={<AdminPanel />}>
               <Route path="/admin/home" element={<AdminHome />} />
-              <Route path="/admin/reports" element={<Dashboard />} />
+              <Route path="/admin/reports" element={<Reports />} />
               <Route path="/admin/manageusers" element={<ManageUsers />} />
             </Route>
           </Routes>
