@@ -19,7 +19,7 @@ const UserAccountSettings = () => {
     <div className=" flex flex-col h-full w-full md:p-7 gap-2">
       {auth.currentUser?.emailVerified && (
         <Link
-          to={"/admin/home"}
+          to={"/admin/"}
           className=" font-semibold border p-2 rounded-md shadow-md hover:bg-skipColor hover:bg-opacity-50 duration-500 dark:hover:bg-opacity-25"
         >
           Go to Admin Dashboard <br />

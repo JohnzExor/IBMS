@@ -28,7 +28,7 @@ const AdminPanel = () => {
       <div className="flex items-center justify-center gap-2">
         <div className=" flex items-center justify-between w-full p-4">
           <Link
-            to={"/admin/home"}
+            to={"/admin/"}
             className="cursor-pointer font-semibold text-xl md:text-4xl"
           >
             <label>
