@@ -7,13 +7,13 @@ import AdminSideBar from "./AdminSideBar";
 import AdminLinks from "./AdminLinks";
 import { ModeToggle } from "@/components/theme/mode-toggle";
 import { useFirebaseServices } from "@/store/useFirebase";
-import { IoLogOut } from "react-icons/io5";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/Firebase";
+import LogoutBtn from "@/components/LogoutBtn";
 
 const AdminPanel = () => {
   const navigate = useNavigate();
-  const { userLogout, currentUser } = useFirebaseServices();
+  const { currentUser } = useFirebaseServices();
 
   useEffect(() => {
     onAuthStateChanged(auth, () => {
@@ -37,13 +37,7 @@ const AdminPanel = () => {
           </Link>
           <div className="hidden md:flex items-center gap-2">
             <ModeToggle />
-            <button
-              onClick={() => userLogout()}
-              className=" border rounded-xl bg-nextColor text-white p-2 flex items-center gap-2 dark:bg-opacity-50"
-            >
-              <IoLogOut size={25} />
-              Logout
-            </button>
+            <LogoutBtn />
           </div>
           <Sheet>
             <SheetTrigger className="md:hidden">
