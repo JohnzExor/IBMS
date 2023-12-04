@@ -17,15 +17,11 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className="flex flex-col items-center h-screen px-6">
-        <div className="flex md:w-4/5 min-h-screen pt-20 w-full">
-          <div className=" hidden md:block h-5/6 border-r pr-4 ">
-            <SideBar />
-          </div>
-          <div className="md:h-4/5">
-            <Outlet />
-          </div>
+      <div className="flex md:px-40 p-4 py-10 md:py-20">
+        <div className="hidden md:block w-96">
+          <SideBar />
         </div>
+        <Outlet />
       </div>
     </>
   );

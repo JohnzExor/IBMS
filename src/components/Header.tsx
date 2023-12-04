@@ -5,10 +5,11 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { FaBarsStaggered } from "react-icons/fa6";
 import SideBar from "./SideBar";
 import { ModeToggle } from "./theme/mode-toggle";
+import LogoutBtn from "./LogoutBtn";
 
 const Header = () => {
   return (
-    <div className="fixed w-full flex justify-center p-4 bg-gradient-to-b from-skipColor dark:from-transparent">
+    <div className="w-full flex justify-center p-4 bg-gradient-to-b from-skipColor dark:from-transparent">
       <div className="flex gap-1 justify-center">
         <Link
           to={"/"}
@@ -32,8 +33,9 @@ const Header = () => {
             <SideBar />
           </SheetContent>
         </Sheet>
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-1">
           <ModeToggle />
+          <LogoutBtn />
         </div>
       </div>
     </div>

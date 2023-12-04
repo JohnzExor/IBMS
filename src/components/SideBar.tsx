@@ -6,12 +6,12 @@ import LogoutBtn from "./LogoutBtn";
 
 const SideBar = () => {
   return (
-    <div className="flex flex-col items-center md:items-start h-full bg-gradient-to-l md:w-80">
+    <div className="flex flex-col items-center md:items-start h-full bg-gradient-to-l">
       <div className="md:hidden">
         <ModeToggle />
       </div>
       <div>
-        <h1 className="font-semibold text-xl mt-4">IBMS</h1>
+        <h1 className="font-semibold text-xl md:text-3xl">IBMS</h1>
         <p>Institutional Behavior Monitoring System</p>
       </div>
       <div className="mt-4 flex flex-col gap-2">
@@ -23,7 +23,7 @@ const SideBar = () => {
           </button>
         </Link>
       </div>
-      <div className="flex flex-col gap-2 mt-auto ml-auto md:ml-0 md:mr-auto">
+      <div className="flex flex-col gap-2 mt-auto ml-auto md:hidden">
         <LogoutBtn />
       </div>
     </div>

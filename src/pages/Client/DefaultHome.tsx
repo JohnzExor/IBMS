@@ -4,7 +4,7 @@ import { BiSolidReport } from "react-icons/bi";
 
 const DefaultHome = () => {
   return (
-    <div className=" w-full flex flex-col md:flex-row items-center justify-center gap-4  h-full">
+    <div className=" w-full flex flex-col md:flex-row items-center justify-center gap-4 h-full">
       <img src={img} className="w-80 md:w-1/3 md:hidden" />
       <div className="md:w-1/4 flex flex-col items gap-4">
         <h1 className=" text-4xl font-semibold">Home</h1>

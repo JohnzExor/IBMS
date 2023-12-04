@@ -30,7 +30,7 @@ const Reports = ({ data }: Props) => {
 
   const steps = ["Request", "Reviewing", "Accepted", "Completed"];
   return (
-    <div className="w-full">
+    <div className=" w-full">
       <Accordion type="multiple">
         <AccordionItem value="item-1">
           <AccordionTrigger className=" bg-gradient-to-l shadow-md  from-skipColor dark:from-slate-700 rounded-xl p-4 mt-2">
