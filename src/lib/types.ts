@@ -11,6 +11,7 @@ export type ReportDetails = {
   createdDateAt?: string;
   createdTimeAt?: string;
   status?: number | string;
+  statusNo?: string;
   documentID?: string;
   fileStatus?: string;
 };
@@ -31,7 +32,7 @@ export type Firebase = {
   reportProgress: ReportDetails[];
   adminDashboardData: ReportDetails[];
   userLogIn: (email: string, password: string) => void;
-  userLogout: () => void;
+  userLogout: () => Promise<void>;
   submitReport: (data: ReportDetails) => void;
   getUserReportProgress: () => void;
   getUsersReport: () => void;
@@ -41,6 +42,11 @@ export type Firebase = {
     isSuperUser: CheckedState | undefined
   ) => Promise<void>;
   getUsersData: () => void;
+  updateUserPassword: (
+    oldPassword: string,
+    newPassword: string
+  ) => Promise<void>;
+  updateReportStatus: (documentID: string, status: number) => void;
 };
 
 export const authSchema = z.object({

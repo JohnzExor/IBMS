@@ -11,12 +11,14 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Button } from "./ui/button";
 import { useFirebaseServices } from "@/store/useFirebase";
+import { cancelBTN, normalBTN, normalBTNLong } from "@/styles/style";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 
 const LogoutBtn = () => {
   const { userLogout } = useFirebaseServices();
   return (
     <Dialog>
-      <DialogTrigger className=" text-white flex items-center gap-1 bg-nextColor dark:bg-opacity-50 w-fit py-2 px-4 rounded-2xl">
+      <DialogTrigger className={normalBTN}>
         <AiOutlineLogout />
         <span>Logout</span>
       </DialogTrigger>
@@ -27,19 +29,13 @@ const LogoutBtn = () => {
             You are about to be logged out from this device.
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className=" flex flex-row gap-2">
+        <DialogFooter className=" flex flex-row gap-1 md:gap-0">
           <DialogClose asChild>
-            <Button
-              type="button"
-              className="text-white dark:bg-slate-900 gap-1 w-fit py-2 px-4 rounded-2xl"
-            >
-              Cancel
+            <Button type="button" className={cancelBTN}>
+              <MdKeyboardArrowLeft size={30} />
             </Button>
           </DialogClose>
-          <Button
-            onClick={() => userLogout()}
-            className="text-white gap-1 bg-nextColor dark:bg-opacity-50 w-full py-2 px-4 rounded-2xl"
-          >
+          <Button onClick={() => userLogout()} className={normalBTNLong}>
             Logout
           </Button>
         </DialogFooter>

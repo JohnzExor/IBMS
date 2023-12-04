@@ -17,9 +17,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ReportDetails } from "@/lib/types";
-import { Link } from "react-router-dom";
 import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import { DialogContent } from "../ui/dialog";
+import SetReportStatus from "../SetReportStatus";
 
 export const columns: ColumnDef<ReportDetails>[] = [
   {
@@ -140,11 +140,15 @@ export const columns: ColumnDef<ReportDetails>[] = [
               Copy Document ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <Link to={`/admin/viewreport/${report.documentID}`}>
-              <DropdownMenuItem>Download Report</DropdownMenuItem>
-              <DropdownMenuItem>Set Status</DropdownMenuItem>
-              <DropdownMenuItem>Flag Report</DropdownMenuItem>
-            </Link>
+            <DropdownMenuItem>Download Report</DropdownMenuItem>
+            {report.documentID ? (
+              <SetReportStatus
+                documentID={report.documentID}
+                status={report.statusNo as string}
+              />
+            ) : null}
+
+            <DropdownMenuItem>Flag Report</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

@@ -37,6 +37,7 @@ import { reportSchema } from "@/lib/types";
 import { useFirebaseServices } from "@/store/useFirebase";
 import { toast } from "@/components/ui/use-toast";
 import { BiEdit } from "react-icons/bi";
+import { cancelBTN, normalBTN, normalBTNLong } from "@/styles/style";
 const ReportPage = () => {
   const { submitReport } = useFirebaseServices();
   const [isConfirmed, setIsConfirmed] = useState(false);
@@ -224,28 +225,25 @@ const ReportPage = () => {
                 <div className="flex justify-center gap-2">
                   <button
                     onClick={() => setIsConfirmed(false)}
-                    className="text-white flex  items-center gap-1 bg-nextColor dark:bg-opacity-50 w-fit py-2 px-4 rounded-2xl"
+                    className={normalBTN}
                     type="submit"
                   >
                     <BiEdit />
                     Edit
                   </button>
-                  <button
-                    className="text-white flex items-center gap-1 bg-nextColor dark:bg-opacity-50 w-fit py-2 px-4 rounded-2xl"
-                    type="submit"
-                  >
+                  <button className={normalBTN} type="submit">
                     {isLoading ? "Submitting.." : "Submit Report"}
                   </button>
                 </div>
               ) : (
                 <div className=" flex justify-center gap-1 text-white">
                   <Link to={"/"}>
-                    <button className=" font-semibold flex items-center bg-skipColor rounded-xl py-2 px-2 shadow-xl dark:bg-opacity-50">
+                    <button className={cancelBTN}>
                       <MdKeyboardArrowLeft size={30} />
                     </button>
                   </Link>
                   <Dialog>
-                    <DialogTrigger className="text-white flex items-center gap-1 bg-nextColor dark:bg-opacity-50 w-fit py-2 px-4 rounded-2xl">
+                    <DialogTrigger className={normalBTNLong}>
                       Next
                     </DialogTrigger>
                     <DialogContent>
@@ -286,19 +284,16 @@ const ReportPage = () => {
                           </span>
                         </DialogDescription>
                       </DialogHeader>
-                      <DialogFooter className=" flex flex-row gap-2">
+                      <DialogFooter className=" flex flex-row ">
                         <DialogClose asChild>
-                          <Button
-                            type="button"
-                            className="text-white gap-1 w-fit py-2 px-4 rounded-2xl bg-skipColor hover:bg-skipColor dark:bg-opacity-50 shadow-md"
-                          >
-                            Cancel
+                          <Button type="button" className={cancelBTN}>
+                            <MdKeyboardArrowLeft size={30} />
                           </Button>
                         </DialogClose>
                         <DialogClose asChild>
                           <Button
                             type="submit"
-                            className="text-white gap-1 bg-nextColor dark:bg-opacity-50 w-full py-2 px-4 rounded-2xl text-center hover:bg-nextColor shadow-md"
+                            className={normalBTNLong}
                             onClick={() => checkAllFields()}
                           >
                             Confirm

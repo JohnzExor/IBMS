@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updatePassword,
 } from "firebase/auth";
 import { create } from "zustand";
 import { Firebase, ReportDetails, UsersDetails } from "@/lib/types";
@@ -138,7 +139,14 @@ export const useFirebaseServices = create<Firebase>((set) => ({
     try {
       const snapshot = await getDocs(collection(db, "reports"));
       const fetchedAdminDashboardData: ReportDetails[] = [];
-      const status = ["Request", "Reviewing", "Accepted", "Completed"];
+      const status = [
+        "Request",
+        "Reviewing",
+        "Accepted",
+        "Completed",
+        "",
+        "Denied",
+      ];
 
       snapshot.forEach((doc) => {
         const postData = doc.data() as ReportDetails;
@@ -152,6 +160,7 @@ export const useFirebaseServices = create<Firebase>((set) => ({
           createdDateAt: postData.createdDateAt,
           createdTimeAt: postData.createdTimeAt,
           status: status[Number(postData.status)],
+          statusNo: postData.status as string,
           documentID: postData.documentID,
           fileStatus: postData.fileStatus,
         });
@@ -197,5 +206,42 @@ export const useFirebaseServices = create<Firebase>((set) => ({
     });
 
     set({ usersData: fetchedData.reverse() });
+  },
+
+  updateUserPassword: async (oldPassword, newPassword) => {
+    const { currentUser, getCurrentUser } = useFirebaseServices.getState();
+    const uid = currentUser[0].uid;
+
+    try {
+      if (currentUser[0].password === oldPassword) {
+        if (auth.currentUser) {
+          await updatePassword(auth?.currentUser, newPassword).then(
+            async () => {
+              await updateDoc(doc(db, "users", uid as string), {
+                password: newPassword,
+              });
+              getCurrentUser();
+              toast({
+                description: "The password has been successfully updated.",
+              });
+            }
+          );
+        }
+      } else {
+        toast({ description: "Wrong password" });
+      }
+    } catch (e: any) {
+      toast({ description: e.message });
+    }
+  },
+
+  updateReportStatus: async (documentID, status) => {
+    const { getUsersReport } = useFirebaseServices.getState();
+    await updateDoc(doc(db, "reports", documentID), {
+      status: status,
+    }).then(() => {
+      toast({ description: `${documentID} status is set to ${status}` });
+      getUsersReport();
+    });
   },
 }));

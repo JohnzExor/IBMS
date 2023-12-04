@@ -1,5 +1,4 @@
 import { auth } from "@/Firebase";
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
 import { onAuthStateChanged } from "firebase/auth";
@@ -24,7 +23,6 @@ const Home = () => {
         </div>
         <Outlet />
       </div>
-      <Footer />
     </div>
   );
 };

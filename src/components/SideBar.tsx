@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { MdOutlineSwitchAccount } from "react-icons/md";
 import { ModeToggle } from "./theme/mode-toggle";
 import LogoutBtn from "./LogoutBtn";
+import UpdatePassword from "./UpdatePassword";
+import { useFirebaseServices } from "@/store/useFirebase";
 
 const SideBar = () => {
+  const { currentUser } = useFirebaseServices();
   return (
     <div className="flex flex-col items-center md:items-start h-full bg-gradient-to-l">
       <div className="md:hidden">
@@ -23,6 +26,15 @@ const SideBar = () => {
           </button>
         </Link>
       </div>
+      <div className="mt-4 ">
+        {currentUser.length > 0 && currentUser[0].password === "123456" ? (
+          <UpdatePassword
+            text="It appears that your current password is set to the default. 
+          It is strongly recommended that you change your password for security reasons."
+          />
+        ) : null}
+      </div>
+
       <div className="flex flex-col gap-2 mt-auto ml-auto md:hidden">
         <LogoutBtn />
       </div>

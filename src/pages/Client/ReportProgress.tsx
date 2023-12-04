@@ -12,7 +12,7 @@ const ReportProgress = () => {
     getUserReportProgress();
   }, []);
   return (
-    <div className="w-full flex flex-col md:flex-row md:gap-20 items-start justify-center">
+    <div className="w-full flex flex-col md:flex-row md:gap-20 md:items-start justify-center items-center">
       <img src={img2} className="w-80 md:w-1/3 md:hidden" />
       <div className="flex flex-col items-center md:w-1/2 md:overflow-y-auto md:h-[700px] md:px-4">
         <h1 className="font-semibold text-2xl w-full text-left">Reports</h1>
