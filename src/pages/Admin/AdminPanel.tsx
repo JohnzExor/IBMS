@@ -6,6 +6,7 @@ import { useFirebaseServices } from "@/store/useFirebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/Firebase";
 import AdminHeader from "./AdminHeader";
+import Footer from "@/components/Footer";
 
 const AdminPanel = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const AdminPanel = () => {
         </div>
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 };

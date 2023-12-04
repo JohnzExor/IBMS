@@ -13,20 +13,20 @@ const Header = () => {
       <div className="flex gap-1 justify-center">
         <Link
           to={"/"}
-          className="text-white flex items-center gap-1 bg-nextColor dark:bg-slate-900 w-fit py-2 px-4 rounded-2xl"
+          className="text-white flex items-center gap-1 bg-nextColor dark:bg-opacity-50 w-fit py-2 px-4 rounded-2xl"
         >
           <FaHome size={20} />
           Home
         </Link>
         <Link
           to={"/progress"}
-          className="text-white flex items-center justify-center gap-1 bg-nextColor dark:bg-slate-900 w-full py-2 px-4 rounded-2xl"
+          className="text-white flex items-center justify-center gap-1 bg-nextColor dark:bg-opacity-50 w-full py-2 px-4 rounded-2xl"
         >
           <FaBarsProgress size={20} />
           Report Progress
         </Link>
         <Sheet>
-          <SheetTrigger className="bg-nextColor dark:bg-slate-900 w-fit py-2 px-4 rounded-2xl text-white md:hidden">
+          <SheetTrigger className="bg-nextColor dark:bg-opacity-50 w-fit py-2 px-4 rounded-2xl text-white md:hidden">
             <FaBarsStaggered />
           </SheetTrigger>
           <SheetContent>

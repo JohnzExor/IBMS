@@ -1,4 +1,5 @@
 import { auth } from "@/Firebase";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
 import { onAuthStateChanged } from "firebase/auth";
@@ -15,7 +16,7 @@ const Home = () => {
     });
   }, []);
   return (
-    <>
+    <div>
       <Header />
       <div className="flex md:px-40 p-4 py-10 md:py-20">
         <div className="hidden md:block w-96">
@@ -23,7 +24,8 @@ const Home = () => {
         </div>
         <Outlet />
       </div>
-    </>
+      <Footer />
+    </div>
   );
 };
 

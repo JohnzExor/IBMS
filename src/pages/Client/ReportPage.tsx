@@ -218,7 +218,7 @@ const ReportPage = () => {
               />
               <div className="grid w-full max-w-sm items-center gap-1.5 text-sm">
                 <h1 className=" pl-2">Evidence/Proof (Image or Video)</h1>
-                <Input type="file" />
+                <Input type="file" disabled={isConfirmed} />
               </div>
               {isConfirmed ? (
                 <div className="flex justify-center gap-2">
