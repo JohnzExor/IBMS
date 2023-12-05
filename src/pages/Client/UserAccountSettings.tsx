@@ -9,7 +9,7 @@ const UserAccountSettings = () => {
 
   return (
     <div className=" flex flex-col h-full w-full md:p-7 gap-2">
-      {currentUser[0].isSuperUser === 1 ? (
+      {currentUser.length > 0 && currentUser[0].isSuperUser === 1 ? (
         <Link
           to={"/admin/"}
           className=" font-semibold border p-2 rounded-md shadow-md hover:bg-skipColor hover:bg-opacity-50 duration-500 dark:hover:bg-opacity-25"

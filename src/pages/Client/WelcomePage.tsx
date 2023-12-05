@@ -23,7 +23,7 @@ const WelcomePage = () => {
               <h1 className="font-bold text-2xl md:text-5xl">
                 Welcome to The <span>IBMS!</span>
               </h1>
-              <p className=" font-thin text-center">
+              <p className=" font-thin text-center md:text-left">
                 Behavioral Monitoring application on the go to make your
                 institutional life secure and protected.
               </p>

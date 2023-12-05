@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import AdminLinks from "./AdminLinks";
@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/Firebase";
 import AdminHeader from "./AdminHeader";
 import Footer from "@/components/Footer";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
 
 const AdminPanel = () => {
   const navigate = useNavigate();
@@ -27,7 +28,9 @@ const AdminPanel = () => {
         <div className=" hidden md:block w-96 mt-4">
           <AdminLinks />
         </div>
-        <Outlet />
+        <Suspense fallback={<LoadingSkeleton />}>
+          <Outlet />
+        </Suspense>
       </div>
       <Footer />
     </div>

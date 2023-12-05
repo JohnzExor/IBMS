@@ -1,23 +1,32 @@
 import { Route, Routes } from "react-router-dom";
-import AuthPageContainer from "./auth/AuthPageContainer";
-import LoginForm from "./auth/LoginForm";
-import Home from "./pages/Client/Home";
 import { Toaster } from "@/components/ui/toaster";
-import WelcomePage from "./pages/Client/WelcomePage";
-import DefaultHome from "./pages/Client/DefaultHome";
-import ReportPage from "./pages/Client/ReportPage";
 import { ThemeProvider } from "./components/theme/theme-provider";
-import ReportSuccess from "./pages/Client/ReportSuccess";
-import ReportProgress from "./pages/Client/ReportProgress";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./Firebase";
-import UserAccountSettings from "./pages/Client/UserAccountSettings";
-import Reports from "./pages/Admin/Reports";
-import AdminPanel from "./pages/Admin/AdminPanel";
-import AdminHome from "./pages/Admin/AdminHome";
-import ManageUsers from "./pages/Admin/ManageUsers";
 import { useFirebaseServices } from "./store/useFirebase";
+
+//Auth Routes
+import AuthPageContainer from "./auth/AuthPageContainer";
+const WelcomePage = lazy(() => import("./pages/Client/WelcomePage"));
+const LoginForm = lazy(() => import("./auth/LoginForm"));
+
+//Home Routes
+import Home from "./pages/Client/Home";
+const DefaultHome = lazy(() => import("./pages/Client/DefaultHome"));
+const ReportPage = lazy(() => import("./pages/Client/ReportPage"));
+const ReportSuccess = lazy(() => import("./pages/Client/ReportSuccess"));
+const ReportProgress = lazy(() => import("./pages/Client/ReportProgress"));
+const UserAccountSettings = lazy(
+  () => import("./pages/Client/UserAccountSettings")
+);
+
+//Admin Routes
+import AdminPanel from "./pages/Admin/AdminPanel";
+import LoadingSkeleton from "./components/LoadingSkeleton";
+const AdminHome = lazy(() => import("./pages/Admin/AdminHome"));
+const Reports = lazy(() => import("./pages/Admin/Reports"));
+const ManageUsers = lazy(() => import("./pages/Admin/ManageUsers"));
 
 const App = () => {
   const { getCurrentUser } = useFirebaseServices();
@@ -33,12 +42,16 @@ const App = () => {
         <div className="h-screen fixed w-full flex items-end -z-10">
           <div className=" bg-gradient-to-t from-red-100 dark:from-transparent h-1/3 w-full"></div>
         </div>
-        {!isLoading && (
+
+        {isLoading ? (
+          <LoadingSkeleton />
+        ) : (
           <Routes>
             <Route path="/auth" element={<AuthPageContainer />}>
               <Route path="/auth/welcome" element={<WelcomePage />} />
               <Route path="/auth/login" element={<LoginForm />} />
             </Route>
+
             <Route path="/" element={<Home />}>
               <Route path="/" element={<DefaultHome />} />
               <Route path="/report" element={<ReportPage />} />
@@ -49,6 +62,7 @@ const App = () => {
                 element={<UserAccountSettings />}
               />
             </Route>
+
             <Route path="/admin" element={<AdminPanel />}>
               <Route path="/admin/" element={<AdminHome />} />
               <Route path="/admin/reports" element={<Reports />} />

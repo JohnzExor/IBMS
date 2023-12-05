@@ -1,8 +1,9 @@
 import { auth } from "@/Firebase";
 import Header from "@/components/Header";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
 import SideBar from "@/components/SideBar";
 import { onAuthStateChanged } from "firebase/auth";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -21,7 +22,9 @@ const Home = () => {
         <div className="hidden md:block w-96">
           <SideBar />
         </div>
-        <Outlet />
+        <Suspense fallback={<LoadingSkeleton />}>
+          <Outlet />
+        </Suspense>
       </div>
     </div>
   );
