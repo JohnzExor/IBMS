@@ -101,16 +101,13 @@ const ReportPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full md:flex-row gap-4 md:gap-20">
-      <img src={img} className="md:w-1/3 md:hidden" />
+    <div className="flex flex-col md:items-start md:flex-row w-full gap-4">
+      <img src={img} className="md:w-1/3  md:hidden" />
       <div className="pb-7">
         <h1 className="font-semibold text-xl">Write a Report</h1>
         <div>
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-3 w-80 md:w-96"
-            >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
               <div className="flex gap-1 items-center">
                 <FormField
                   control={form.control}

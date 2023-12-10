@@ -12,8 +12,8 @@ const WelcomePage = lazy(() => import("./pages/Client/WelcomePage"));
 const LoginForm = lazy(() => import("./auth/LoginForm"));
 
 //Home Routes
-import Home from "./pages/Client/Home";
-const DefaultHome = lazy(() => import("./pages/Client/DefaultHome"));
+import Index from "./pages/Client/Index";
+const Home = lazy(() => import("./pages/Client/Home"));
 const ReportPage = lazy(() => import("./pages/Client/ReportPage"));
 const ReportSuccess = lazy(() => import("./pages/Client/ReportSuccess"));
 const ReportProgress = lazy(() => import("./pages/Client/ReportProgress"));
@@ -52,8 +52,8 @@ const App = () => {
               <Route path="/auth/login" element={<LoginForm />} />
             </Route>
 
-            <Route path="/" element={<Home />}>
-              <Route path="/" element={<DefaultHome />} />
+            <Route path="/" element={<Index />}>
+              <Route path="/" element={<Home />} />
               <Route path="/report" element={<ReportPage />} />
               <Route path="/reportsuccess" element={<ReportSuccess />} />
               <Route path="/progress" element={<ReportProgress />} />

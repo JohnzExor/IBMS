@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
 import { useLocation } from "react-router-dom";
-import AddUsers from "@/pages/Admin/AddUsers";
+import AddUsers from "@/components/AddUsers";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

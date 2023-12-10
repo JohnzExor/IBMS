@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const AdminLinks = () => {
   return (
-    <div className="flex flex-col justify-center md:text-right gap-2 w-full">
+    <div className="flex flex-col justify-center md:text-right gap-2 md:w-96">
       <Link to={"/admin/reports"} className={adminBTNLinks}>
         Reports
       </Link>

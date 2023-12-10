@@ -1,33 +1,32 @@
-import { auth } from "@/Firebase";
-import Header from "@/components/Header";
-import LoadingSkeleton from "@/components/LoadingSkeleton";
-import SideBar from "@/components/SideBar";
-import { onAuthStateChanged } from "firebase/auth";
-import { Suspense, useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import img from "@/assets/images/home.svg";
+import { Link } from "react-router-dom";
+import { BiSolidReport } from "react-icons/bi";
 
-const Home = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        navigate("/auth/welcome");
-      }
-    });
-  }, []);
+const DefaultHome = () => {
   return (
-    <div>
-      <Header />
-      <div className="flex md:px-40 p-4 py-10 md:py-20">
-        <div className="hidden md:block w-96">
-          <SideBar />
+    <div className="flex flex-col items-center md:flex-row gap-10 md:gap-0">
+      <img src={img} className="w-80 md:w-1/3 md:hidden" />
+      <div className="flex flex-col items gap-4">
+        <h1 className=" text-4xl font-semibold">Home</h1>
+        <p className="font-thin">
+          Behavioral Monitoring application on the go to make your institutional
+          life secure and protected.
+        </p>
+        <div className=" flex items-center justify-center w-full">
+          <Link
+            to={"/report"}
+            className="text-white w-full bg-nextColor dark:bg-opacity-50 rounded-xl p-2 shadow-xl hover:bg-transparent border hover:border-nextColor hover:bg-gradient-to-l duration-500 ease-in-out from-nextColor"
+          >
+            <button className=" text-center font-semibold flex items-center text-2xl justify-center w-full">
+              <BiSolidReport size={35} />
+              Report
+            </button>
+          </Link>
         </div>
-        <Suspense fallback={<LoadingSkeleton />}>
-          <Outlet />
-        </Suspense>
       </div>
+      <img src={img} className="md:w-1/2 hidden md:block" />
     </div>
   );
 };
 
-export default Home;
+export default DefaultHome;

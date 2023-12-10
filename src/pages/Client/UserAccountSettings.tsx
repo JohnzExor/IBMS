@@ -8,7 +8,7 @@ const UserAccountSettings = () => {
   const { currentUser } = useFirebaseServices();
 
   return (
-    <div className=" flex flex-col h-full w-full md:p-7 gap-2">
+    <div className="flex flex-col gap-2">
       {currentUser.length > 0 && currentUser[0].isSuperUser === 1 ? (
         <Link
           to={"/admin/"}

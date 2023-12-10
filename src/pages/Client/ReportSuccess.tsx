@@ -3,7 +3,7 @@ import img from "@/assets/images/successReport.svg";
 
 const ReportSuccess = () => {
   return (
-    <div className=" flex flex-col md:flex-row justify-center items-center w-full h-full gap-10">
+    <div className="flex flex-col md:flex-row gap-4">
       <img src={img} className="md:hidden" />
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-xl font-semibold text-left w-full">

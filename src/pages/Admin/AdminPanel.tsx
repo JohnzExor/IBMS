@@ -1,13 +1,11 @@
 import { Suspense, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-import AdminLinks from "./AdminLinks";
 import { useFirebaseServices } from "@/store/useFirebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/Firebase";
 import AdminHeader from "./AdminHeader";
 import Footer from "@/components/Footer";
-import LoadingSkeleton from "@/components/LoadingSkeleton";
 
 const AdminPanel = () => {
   const navigate = useNavigate();
@@ -22,13 +20,10 @@ const AdminPanel = () => {
   }, []);
 
   return (
-    <div className="p-3 md:p-14">
+    <div className="flex flex-col h-screen">
       <AdminHeader />
-      <div className="flex gap-10 items-start">
-        <div className=" hidden md:block w-96 mt-4">
-          <AdminLinks />
-        </div>
-        <Suspense fallback={<LoadingSkeleton />}>
+      <div className=" p-3 md:px-10 flex flex-col items-center">
+        <Suspense>
           <Outlet />
         </Suspense>
       </div>

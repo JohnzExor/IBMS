@@ -3,11 +3,10 @@ import AdminLinks from "./AdminLinks";
 
 const AdminHome = () => {
   return (
-    <div className="w-full">
-      <img src={admin} alt="admin" className=" md:ml-40 md:w-1/3 md:absolute" />
-      <div className=" md:hidden my-4">
-        <AdminLinks />
-      </div>
+    <div className=" flex flex-col md:flex-row gap-20">
+      <img src={admin} alt="admin" className="md:hidden" />
+      <AdminLinks />
+      <img src={admin} alt="admin" className="md:w-1/2 hidden md:block" />
     </div>
   );
 };
