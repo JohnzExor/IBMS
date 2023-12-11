@@ -14,12 +14,9 @@ import { IoIosArrowDown } from "react-icons/io";
 const AdminHeader = () => {
   return (
     <div className="flex items-center justify-center gap-2">
-      <div className=" flex items-center justify-between md:justify-center gap-4 w-full p-4">
-        <Link
-          to={"/admin/"}
-          className="cursor-pointer font-semibold text-xl md:text-2xl"
-        >
-          <label>
+      <div className=" flex items-center justify-between md:justify-between md:max-w-7xl gap-4 w-full p-4">
+        <Link to={"/admin/"} className=" font-semibold text-xl md:text-2xl">
+          <label className="cursor-pointer">
             IBMS <span className="font-normal">Admin</span>
           </label>
         </Link>
@@ -44,7 +41,7 @@ const AdminHeader = () => {
           <SheetTrigger className="md:hidden">
             <FaBarsStaggered size={30} />
           </SheetTrigger>
-          <SheetContent>
+          <SheetContent className="bg-gradient-to-tl from-nextColor">
             <AdminSideBar />
           </SheetContent>
         </Sheet>

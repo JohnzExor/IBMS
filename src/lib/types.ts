@@ -31,7 +31,7 @@ export type Firebase = {
   usersData: UsersDetails[];
   reportProgress: ReportDetails[];
   adminDashboardData: ReportDetails[];
-  userLogIn: (email: string, password: string) => void;
+  userLogIn: (email: string, password: string) => Promise<void>;
   userLogout: () => Promise<void>;
   submitReport: (data: ReportDetails) => void;
   getUserReportProgress: () => void;

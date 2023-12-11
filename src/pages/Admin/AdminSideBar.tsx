@@ -9,7 +9,7 @@ import { AiOutlineHome } from "react-icons/ai";
 
 const AdminSideBar = () => {
   return (
-    <div className="flex flex-col gap-4 items-center">
+    <div className="flex flex-col gap-4 items-center h-full">
       <span className="text-xl md:hidden">
         <span className="font-semibold">IBMS </span>Admin
       </span>
@@ -43,7 +43,7 @@ const AdminSideBar = () => {
           Go back to main website
         </Link>
       </div>
-      <div className="flex gap-2 justify-center">
+      <div className="flex gap-2 justify-center mt-auto">
         <ModeToggle />
         <LogoutBtn />
       </div>

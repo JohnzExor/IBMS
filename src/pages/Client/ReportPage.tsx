@@ -103,7 +103,7 @@ const ReportPage = () => {
   return (
     <div className="flex flex-col md:items-start md:flex-row w-full gap-4">
       <img src={img} className="md:w-1/3  md:hidden" />
-      <div className="pb-7">
+      <div className="pb-7 w-full">
         <h1 className="font-semibold text-xl">Write a Report</h1>
         <div>
           <Form {...form}>

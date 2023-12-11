@@ -11,15 +11,18 @@ import { normalBTN } from "@/styles/style";
 const Header = () => {
   return (
     <div className="w-full flex justify-center p-4 bg-gradient-to-b from-skipColor dark:from-transparent">
-      <div className="flex gap-1 justify-center">
-        <Link to={"/"} className={normalBTN}>
-          <FaHome size={20} />
-          Home
-        </Link>
-        <Link to={"/progress"} className={normalBTN}>
-          <FaBarsProgress size={20} />
-          Report Progress
-        </Link>
+      <div className="flex gap-1 justify-center md:justify-between w-full md:max-w-6xl">
+        <div className="flex gap-1">
+          <Link to={"/"} className={normalBTN}>
+            <FaHome size={20} />
+            Home
+          </Link>
+          <Link to={"/progress"} className={normalBTN}>
+            <FaBarsProgress size={20} />
+            Report Progress
+          </Link>
+        </div>
+
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger className={normalBTN}>

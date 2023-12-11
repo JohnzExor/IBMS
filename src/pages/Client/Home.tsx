@@ -4,9 +4,9 @@ import { BiSolidReport } from "react-icons/bi";
 
 const DefaultHome = () => {
   return (
-    <div className="flex flex-col items-center md:flex-row gap-10 md:gap-0">
+    <div className="flex flex-col items-center md:flex-row gap-10">
       <img src={img} className="w-80 md:w-1/3 md:hidden" />
-      <div className="flex flex-col items gap-4">
+      <div className="flex flex-col gap-4">
         <h1 className=" text-4xl font-semibold">Home</h1>
         <p className="font-thin">
           Behavioral Monitoring application on the go to make your institutional

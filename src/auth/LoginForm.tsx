@@ -30,8 +30,9 @@ const LoginForm = () => {
 
   const onSubmit = async (value: z.infer<typeof authSchema>) => {
     setIsLoading(true);
-    await userLogIn(value.email, value.password);
-    setIsLoading(false);
+    await userLogIn(value.email, value.password).then(() =>
+      setIsLoading(false)
+    );
   };
 
   return (
@@ -50,6 +51,7 @@ const LoginForm = () => {
               <FormItem>
                 <FormControl>
                   <Input
+                    type="email"
                     placeholder="Corporate Email"
                     {...field}
                     className=" bg-gray-100 w-72 py-6 rounded-xl dark:bg-opacity-50"
